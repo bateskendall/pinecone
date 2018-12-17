@@ -14,6 +14,8 @@ loop do
       if comment.text.include?(' | ')
         # split comment text into 'company' and 'description'
         job = {company: comment.text.split("|").first.strip, description: comment.text.partition('|').last.strip}
+        
+        # save results to .csv file
         CSV.open('job_info.csv', 'a+') do |csv|
           csv << [job[:company], job[:description]]
         end
